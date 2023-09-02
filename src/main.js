@@ -155,6 +155,11 @@ function randomPoster() {
   accessQuote.innerText = newPoster.quote;
 }
 
+const mainPosterSection = document.getElementById('main-poster');
+const otherSection = document.getElementById('other-section');
+const backButton = document.getElementById('back-button');
+
+
 
 
 //TIPS:
