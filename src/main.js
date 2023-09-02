@@ -1,58 +1,25 @@
-// query selector variables go here 👇
+//how to link Javascript file in HTML? 👇
+//already done in HTML: script src="path-to-your-script.js"></script>
 
-//we are updating random images, title, quotes? how do we do this?
-//When the page loads, we should see a poster with a randomly selected image, title, and quote
-//1. create variable for accessing image
-//2. that variable is possibly an object
-//3. create a function to be able to generate a random number with that variable 
-
-// When the page loads, we should see a poster with a randomly selected image, title, and quote
+// QUERY SELECTOR VARIABLES go here 👇
+//in doc/DOM object, we'll query select for element that has a class with a value of '.value' = '.poster-img' 
+//attributes usu are key:value pairs
 var accessImage = document.querySelector('.poster-img'); //accesses element src ="" where you put image URL
-
-//put random imageURL into src. 
-//so call on accessImage object variable.src = to random image
-//since we created a variable under createPoster function (below), we have to call on the function to access imageURL
-//var imageURL = images[randomIndexForImages] //new image
-//so how to access object value: imageURL within function
-//where can we store this function's retured value? the entire object?
-//we can store this value in a variable!!!
-//create variable that returns object
-//so we can access imageURL with dot notation
-var newPoster = createPoster(imageURL, title, quote); //returns the entire object
-accessImage.src = newPoster.imageURL; //assigns to newImageURL value = random image in images array.
-//QUESTION is a void element <img class="poster-img" src="" alt="nothin' to see here"> an OBJECT? line 13
-//Yes, the <img> element with the class="poster-img" is an HTML element, and in the context of JavaScript, it can be considered an object.
 var accessTitle = document.querySelector('.poster-title');
-accessTitle.innerText = newPoster.title;
-//if we console.log(accessTitle.innerText), it'll just print out title
-//QUESTION: can you give us more examples of what to use inner HTML for? **update multiple items within it** like <section>
 var accessQuote = document.querySelector('.poster-quote'); //gives us access to <h3>Quote</h3>
-accessQuote.innerText = newPoster.quote;
 //QUESTION!!!!!!: lost, what to do now?
 //QUESTION!!!!!!: how do we see what we do on the webpage? Nothing is showing up open html.js so I don't know
 // I'm doing anything!
 
-// Every time the user clicks the Show Random Poster button, a new random poster is displayed.
-//1. the querySelector can used to select the button Show random poster
-//2. we have to attach that button to an event listener tell the computer to listen for a ('click', function)
-//This function will create function that will generate a new random poster.
-
 //calls and selects Show Another Random Poster element:
 var ShowRandomPosterButton = document.querySelector('.show-random');
 
-//select Show Another Random Poster element & tell computer to listen for a click, 
-ShowRandomPosterButton.addEventListener('click', createPoster(imageURL, title, quote))
-//function will have to generate a new random poster: including random image, title, quote.
-//so we use the createPoster(imageURL, title, quote) function?
-//THIS IS WHERE WE LEFT OFF!!!
-//Every time the user clicks the Show Random Poster button, a new random poster is displayed.
-//QUESTION!!!!! why isn't it doing anything to the page?? How do I console.log? Where does it show?
 
-// var createPoster1 = document.querySelector('.main-poster');
-// console.log(createPoster,'this is createPoster')
-// createPoster1.innerText = currentPoster.imageURL;
-// we've provided you with some data to work with 👇
+var makeOwnPosterButton = document.querySelector('.show-form');
+var showSavedPostersButton = document.querySelector('.show-saved')
+var nevermindTakeMeBackButton = document.querySelector('.show-main')
 
+// DATA PROVIDED 👇
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
@@ -151,37 +118,92 @@ var quotes = [
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
-var savedPosters = [];
-var currentPoster;
+var savedPosters = [];//it 2 and 3
+var currentPoster//global variable, use that to store current poster data in that variable
 
-// event listeners go here 👇
+//EVENT LISTENERS HERE! 👇 TELLING COMPUTER TO LISTEN TO CLICK:
 
-// functions and event handlers go here 👇
+// When the page loads, we should see a poster with a randomly selected image, title, and quote
+window.addEventListener('load',randomPoster)
+// Every time the user clicks the Show Random Poster button, a new random poster is displayed.
+ShowRandomPosterButton.addEventListener('click', randomPoster)
+
+
+//When a user clicks the “Make Your Own Poster” button, we should see the form,
+// and the main poster should be hidden
+//hide it show new content
+makeOwnPosterButton.addEventListener('click',generateForm) //next step to generate form, and the main poster should be hidden
+
+//When a user clicks the “Show Saved Posters” button, 
+//we should see the saved posters area, and the main poster should be hidden
+
+showSavedPostersButton.addEventListener('click', showSavedPoster) //=> should see the saved posters area, and the main poster should be hidden
+
+//When a user clicks the “Nevermind, take me back!” or “Back to Main” 
+//buttons, we should only see the main poster section
+nevermindTakeMeBackButton.addEventListener('click', randomPoster)
+//In summary: Be able to switch between the three views (main poster, form, and saved posters) on the correct button clicks
+
+// FUNCTIONS AND EVENT HANDLERS GO HERE 👇
 
 // (we've provided two to get you started)!
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-//Math.floor - but .floor brings it down to nearest whole number
-//Math. = random decimal b/t 0-1
+//Math. = random decimal b/t 0-1   -> Math.floor - .floor brings it down to nearest whole number
 
-//When page loads, we need to generate a poster randomly
-//When user clicks onto Show Random button, this function needs to return a random image, title, quote
-//We have to add functionality to createPoster to do this:
-function createPoster(newImageURL, newTitle, newQuote) {
-  var randomIndexForImages = getRandomIndex(imageURL) //QUESTION: how do we console.log(imageURL), idk what that is, and what that prints out to?
-  var newImageURL = images[randomIndexForImages] //new image
-  var randomIndexForTitle = getRandomIndex(title)
-  var newTitle = titles[randomIndexForTitle] //new random title
-  var randomIndexForQuotes = getRandomIndex(quote)
-  var newQuote = quotes[randomIndexForQuotes] //new random quote
-
+function createPoster(imageURL, title, quote) {
   return {
     id: Date.now(), 
-    imageURL:newImageURL, //change bc our return value has to give us random image
-    title: newTitle, 
-    quote: newQuote}
+    imageURL: imageURL, //change bc our return value has to give us random image
+    title: title, 
+    quote: quote}
 } //returns object..
 
-<button type="button" name="browse-button">Show Another Random Poster</button>
-</main>
+//current poster value is random image, title wuote
+//global variable, use that to store current poster data in that variable
+// var currentPoster = {
+//   newImageURL: images[getRandomIndex(images)],
+//   newTitle: titles[getRandomIndex(titles)],
+//   newQuote: quotes[getRandomIndex(quotes)] 
+// }
+function randomPoster() {
+ //QUESTION: how do we console.log(imageURL), idk what that is, and what that prints out to?
+  var newImageURL = images[getRandomIndex(images)] //new image
+  // console.log(newImageURL)
+  var newTitle = titles[getRandomIndex(titles)] //new random title
+  //console.log(newTitle)
+  var newQuote = quotes[getRandomIndex(quotes)] 
+
+  var newPoster = createPoster(newImageURL, newTitle, newQuote); //returns the entire object
+  accessImage.src = newPoster.imageURL; //assigns to newImageURL value = random image in images array.
+  accessTitle.innerText = newPoster.title;
+  accessQuote.innerText = newPoster.quote;
+}
+
+var makeOwnPosterButton = document.querySelector('.show-form');
+var showSavedPostersButton = document.querySelector('.show-saved')
+var nevermindTakeMeBackButton = document.querySelector('.show-main')
+
+
+
+function generateForm() {
+//should see the form, and the main poster should be hidden - hide it show new content
+//BEST PRACTICE: hide first
+// var mainPosterSection = document.querySelector('.main-poster')
+//selecting HTML element which is an object by class main-poster: class="main-poster" = style="width 200vw";visibility: hidden
+//
+// document.querySelector('.main-poster').style.visibility = "hidden";
+//if I had word hidden in class then use it
+
+//Class selectors - watch for this class, then do its thing!
+
+//hidden means something here: bc it in our CSS style.css class selector there is a 
+//class selector hidden that applies that rule to all elements with a class that has the word hidden in it
+document.querySelector('.main-poster').classList.add("hidden"); //add rule to hide poster
+document.querySelector('.poster-form').classList.remove("hidden")
+}
+
+//.style = inline CSS, go in CSS in HTML 
+//TIPS:
+//Pay attention with SCOPE: has to do with scope!
