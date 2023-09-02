@@ -131,6 +131,7 @@ nevermindTakeMeBackButton.addEventListener('click',backToMainPoster);
 backToMainButton.addEventListener('click',backToMainPoster);
 saveAPosterButton.addEventListener('click', savePoster);
 showMyPoster.addEventListener('click',showUserInputPoster);
+
 // FUNCTIONS AND EVENT HANDLERS GO HERE 👇 (we've provided two to get you started)!
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -242,6 +243,7 @@ function backToMainPoster() {
   mainPoster.classList.remove("hidden");
   nevermindTakeMeBackButton.classList.add("hidden"); //hide that button
   createOwnPosterForm.classList.add("hidden"); //hide that createOwnPosterForm!
+  posterGrid.classList.add("hidden");
 }
 
 var inputForImageURL = document.querySelector('#poster-image-url')
