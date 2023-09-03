@@ -20,7 +20,9 @@ var savedPostersButton = document.querySelector('.saved-posters'); //hidden in s
 
 //iteration 2:
 var showMyPoster = document.querySelector('.make-poster');
+var posterGrid = document.querySelector('.saved-posters-grid')
 
+var savedPosterTitle = document.querySelector('h2')
 // DATA PROVIDED 👇
 var images = [
   "./assets/bees.jpg",
@@ -130,6 +132,7 @@ showSavedPostersButton.addEventListener('click', showSavedPoster); //=> should s
 nevermindTakeMeBackButton.addEventListener('click',backToMainPoster);
 backToMainButton.addEventListener('click',backToMainPoster);
 saveAPosterButton.addEventListener('click', savePoster);
+saveAPosterButton.addEventListener('dblclick', deletePoster)
 showMyPoster.addEventListener('click',showUserInputPoster);
 
 // FUNCTIONS AND EVENT HANDLERS GO HERE 👇 (we've provided two to get you started)!
@@ -160,11 +163,6 @@ function generateForm() {
   createOwnPosterForm.classList.remove("hidden")
 } //Best practice to hide first. To hide, add hidden string rule Class selectors rule book?
 
-//savePoster fx already pushes all current posters up to array.
-
-//savePoster() function already pushes currentPoster into array
-//now we have to prevent click event from adding a duplicate item into array.
-//if statement
 function savePoster() { 
   var isDuplicate = false
   for (i=0; i < savedPosters.length; i++) {
@@ -178,64 +176,24 @@ function savePoster() {
     }
 }  
 
-
-  //check if current poster is in array before pushing it!
-  //do this by using a unique identifier for each poster.... 
-  //if identifier is not present in savedPosters array
-  //then push
-  //current poster pushed to savePoster array.
-
-  //QUESTION!! It's not adding anything else to array but one of the posters!
-
-//QUESTION: WHY IS IT ONLY PUSHING 1 IMAGE??
-//   // var newCurrentPoster = currentPoster.innerText
-//   // console.log(newCurrentPoster, "newCurrentPost")
-//   // if (savedPosters.indexOf(newCurrentPoster) === -1)
-//   //   savedPosters.push(newCurrentPoster)
-//   //   console.log(savedPosters,"saved Posters")
-// }
-
-// for (i=0; i < savedPosters.length; i++) 
-// console.log(savedPosters[i])
-// if (savedPosters[i] !== currentPoster) {
-// console.log("hi")
-// return savedPosters.push(currentPoster) 
-// }
-
-
-// ["currentPoster", ]
-// if (array.length-1 !== curentPoster)
-// savedPosters.push(currentPoster)
-
-//1. push current poster into savedPoster array
-//2. after pushing 1st current poster, you're checking the array.length-1  and check array.length-2
-//3. if they are, remove
-//if user clicks savePoster button, more than once, it will only save it once, no dupes.
-  // console.log(savedPosters, "saved Poster Array")
-  // console.log(currentPoster, "current Poster")
-
-
-//we now want to display all the saved posters. 
-var posterGrid = document.querySelector('.saved-posters-grid')
-// iteration 3: go into savePoster function invoked in the savePosterButton function declaration when clicked
-//currentPoster will be pushed to savedPoster array
-//so every time there is a new current Poster, we want to push that into the saved poster array.
-
-  // show the array of posters
-  // add array into a class selector: class or id
-  // iteration 3 or 4
 function showSavedPoster() {
   posterGrid.innerHTML = ""
+  //example of creating new element - and append chidl
+  // const randomText = document.createElement('h2')
+  // randomText.innerText = "Hi Amy you are cute"
+  // posterGrid.appendChild(randomText)
   for (var i=0; i < savedPosters.length; i++) {
     var posterGridContainer = document.createElement('div');
-    posterGridContainer.classList.add('.saved-posters-grid');
-    posterGridContainer.appendChild(savedPosters[i].cloneNode(true));
-    posterGrid.appendChild(posterGridContainer)
-    console.log(document.querySelector('.saved-posters-grid')) // go into the grid element and add a child for every item in savedPosters array.
+    posterGridContainer.appendChild(savedPosters[i]);
+    posterGrid.appendChild(savedPosters[i])
   }
-  mainPoster.classList.add("hidden"); //add rule to hide poster
+  mainPoster.classList.add("hidden"); 
+  savedPosterTitle.classList.add("hidden");//add rule to hide poster
   savedPostersButton.classList.remove("hidden")
+  posterGrid.classList.remove("hidden")
+  backToMainButton.classList.remove("hidden")
 } 
+
 
 // When a user clicks the “Nevermind, take me back!” or “Back to Main” buttons, we should only see the main poster section
 function backToMainPoster() {
@@ -244,6 +202,8 @@ function backToMainPoster() {
   nevermindTakeMeBackButton.classList.add("hidden"); //hide that button
   createOwnPosterForm.classList.add("hidden"); //hide that createOwnPosterForm!
   posterGrid.classList.add("hidden");
+  backToMainButton.classList.add("hidden")
+  savedPostersButton.classList.add("hidden")
 }
 
 var inputForImageURL = document.querySelector('#poster-image-url')
@@ -275,10 +235,22 @@ function renderPoster(poster) {
 }
 
 
+// Why is this function not removing the poster element when double clicking?
+function deletePoster() {
+  for (i=0; i < savedPosters.length; i++) {
+    if (savedPosters[i].isEqualNode(currentPoster)) {
+      savedPosters.splice(i,1)
+      break; //exit loop
+    }
+  }
+}
 
-// Go through code to create global variables so every function can access it
-//var mainPoster = document.querySelector('.main-poster')
-
+//savedPosters.splice(i,1)
+//So, when you execute savedPosters.splice(i, 1), it
+// removes one element from the savedPosters array at the specified index i. 
+//After this operation, the array will be shorter by one element, and the removed
+// element will no longer be present in the array. This effectively deletes or removes 
+//the element from the array.
 
 //.style = inline CSS, go in CSS in HTML 
 //TIPS:
