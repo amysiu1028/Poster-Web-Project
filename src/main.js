@@ -16,11 +16,13 @@ var backToMainButton = document.querySelector('.back-to-main');
 
 var mainPoster = document.querySelector('.main-poster'); 
 var createOwnPosterForm = document.querySelector('.poster-form');
-var savedPosters = document.querySelector('.saved-posters'); //hidden in string in index.html so to view it have to classList.remove("hidden")
+var savedPostersButton = document.querySelector('.saved-posters'); //hidden in string in index.html so to view it have to classList.remove("hidden")
 
 //iteration 2:
 var showMyPoster = document.querySelector('.make-poster');
+var posterGrid = document.querySelector('.saved-posters-grid')
 
+var savedPosterTitle = document.querySelector('h2')
 // DATA PROVIDED 👇
 var images = [
   "./assets/bees.jpg",
@@ -120,11 +122,8 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
-var currentPoster = document.querySelector('.poster') // var currentPoster
+var currentPoster = document.querySelector('.poster') // current poster on main page
 var newPoster = {} //container, can pass an object
-
-//store into an object to store into different function
-
 //EVENT LISTENERS HERE! 👇 TELLING COMPUTER TO LISTEN TO CLICK:
 window.addEventListener('load',randomPoster);
 ShowRandomPosterButton.addEventListener('click', randomPoster);
@@ -133,6 +132,7 @@ showSavedPostersButton.addEventListener('click', showSavedPoster); //=> should s
 nevermindTakeMeBackButton.addEventListener('click',backToMainPoster);
 backToMainButton.addEventListener('click',backToMainPoster);
 saveAPosterButton.addEventListener('click', savePoster);
+saveAPosterButton.addEventListener('dblclick', deletePoster)
 showMyPoster.addEventListener('click',showUserInputPoster);
 
 // FUNCTIONS AND EVENT HANDLERS GO HERE 👇 (we've provided two to get you started)!
@@ -150,8 +150,7 @@ function createPoster(imageURL, title, quote) {
 
 function randomPoster() {
   var newImageURL = images[getRandomIndex(images)] // console.log(newImageURL)
-  var newTitle = titles[getRandomIndex(titles)] 
-//console.log(newTitle)
+  var newTitle = titles[getRandomIndex(titles)] //console.log(newTitle)
   var newQuote = quotes[getRandomIndex(quotes)] 
   newPoster = createPoster(newImageURL, newTitle, newQuote); //returns the entire object
   accessImage.src = newPoster.imageURL; //assigns to newImageURL value = random image in images array.
@@ -164,31 +163,37 @@ function generateForm() {
   createOwnPosterForm.classList.remove("hidden")
 } //Best practice to hide first. To hide, add hidden string rule Class selectors rule book?
 
-//savePoster fx already pushes all current posters up to array.
-//we now want to display all the saved posters. 
-//so call on that savePoster() function to get the array in another function below this
-//do for loop to be able to push every current poster in. So that every time user
-//clicks on button, it'll be pushed up to array, and then displayed
-function savePoster() {
-//should save a poster
-  savedPosters.push(currentPoster) //make an array of HTML element
-}
+function savePoster() { 
+  var isDuplicate = false
+  for (i=0; i < savedPosters.length; i++) {
+    if (savedPosters[i].isEqualNode(currentPoster)) { //going to every index in array, so if current poster is different then, it'll add that
+      isDuplicate = true; 
+      break; 
+    }
+  }
+    if (!isDuplicate) {
+      savedPosters.push(currentPoster.cloneNode(true))
+    }
+}  
 
-// iteration 3: go into savePoster function invoked in the savePosterButton function declaration when clicked
-//currentPoster will be pushed to savedPoster array
-//so every time there is a new current Poster, we want to push that into the saved poster array.
 function showSavedPoster() {
-  //show the array of posters
-  //add array into a class selector: class or id
-  //iteration 3 or 4
-  // for (var i=0; i < savedPosters.length; i++) {
-  //   document.querySelector('.saved-posters-grid').appendChild(savedPosters[i])
-  //   console.log(document.querySelector('.saved-posters-grid'))
-  //go into the grid element and add a child for every item in savedPosters array.
-  // }
-  mainPoster.classList.add("hidden"); //add rule to hide poster
-  savedPosters.classList.remove("hidden")
+  posterGrid.innerHTML = ""
+  //example of creating new element - and append chidl
+  // const randomText = document.createElement('h2')
+  // randomText.innerText = "Hi Amy you are cute"
+  // posterGrid.appendChild(randomText)
+  for (var i=0; i < savedPosters.length; i++) {
+    var posterGridContainer = document.createElement('div');
+    posterGridContainer.appendChild(savedPosters[i]);
+    posterGrid.appendChild(savedPosters[i])
+  }
+  mainPoster.classList.add("hidden"); 
+  savedPosterTitle.classList.add("hidden");//add rule to hide poster
+  savedPostersButton.classList.remove("hidden")
+  posterGrid.classList.remove("hidden")
+  backToMainButton.classList.remove("hidden")
 } 
+
 
 // When a user clicks the “Nevermind, take me back!” or “Back to Main” buttons, we should only see the main poster section
 function backToMainPoster() {
@@ -196,6 +201,9 @@ function backToMainPoster() {
   mainPoster.classList.remove("hidden");
   nevermindTakeMeBackButton.classList.add("hidden"); //hide that button
   createOwnPosterForm.classList.add("hidden"); //hide that createOwnPosterForm!
+  posterGrid.classList.add("hidden");
+  backToMainButton.classList.add("hidden")
+  savedPostersButton.classList.add("hidden")
 }
 
 var inputForImageURL = document.querySelector('#poster-image-url')
@@ -227,10 +235,22 @@ function renderPoster(poster) {
 }
 
 
+// Why is this function not removing the poster element when double clicking?
+function deletePoster() {
+  for (i=0; i < savedPosters.length; i++) {
+    if (savedPosters[i].isEqualNode(currentPoster)) {
+      savedPosters.splice(i,1)
+      break; //exit loop
+    }
+  }
+}
 
-// Go through code to create global variables so every function can access it
-//var mainPoster = document.querySelector('.main-poster')
-
+//savedPosters.splice(i,1)
+//So, when you execute savedPosters.splice(i, 1), it
+// removes one element from the savedPosters array at the specified index i. 
+//After this operation, the array will be shorter by one element, and the removed
+// element will no longer be present in the array. This effectively deletes or removes 
+//the element from the array.
 
 //.style = inline CSS, go in CSS in HTML 
 //TIPS:
