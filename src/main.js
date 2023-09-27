@@ -135,10 +135,10 @@ saveAPosterButton.addEventListener('click', savePoster);
 saveAPosterButton.addEventListener('dblclick', deletePoster)
 showMyPoster.addEventListener('click',showUserInputPoster);
 
-// FUNCTIONS AND EVENT HANDLERS GO HERE 👇 (we've provided two to get you started)!
+// FUNCTIONS AND EVENT HANDLERS
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
-} //Math. = random decimal b/t 0-1   -> Math.floor - .floor brings it down to nearest whole number
+} 
 
 function createPoster(imageURL, title, quote) {
   return {
@@ -146,27 +146,27 @@ function createPoster(imageURL, title, quote) {
     imageURL: imageURL,
     title: title, 
     quote: quote}
-} //returns object..
+} 
 
 function randomPoster() {
-  var newImageURL = images[getRandomIndex(images)] // console.log(newImageURL)
-  var newTitle = titles[getRandomIndex(titles)] //console.log(newTitle)
+  var newImageURL = images[getRandomIndex(images)] 
+  var newTitle = titles[getRandomIndex(titles)] 
   var newQuote = quotes[getRandomIndex(quotes)] 
-  newPoster = createPoster(newImageURL, newTitle, newQuote); //returns the entire object
-  accessImage.src = newPoster.imageURL; //assigns to newImageURL value = random image in images array.
+  newPoster = createPoster(newImageURL, newTitle, newQuote); 
+  accessImage.src = newPoster.imageURL; 
   accessTitle.innerText = newPoster.title;
   accessQuote.innerText = newPoster.quote;
 }
 
 function generateForm() {
-  mainPoster.classList.add("hidden"); //add rule to hide poster
+  mainPoster.classList.add("hidden"); 
   createOwnPosterForm.classList.remove("hidden")
-} //Best practice to hide first. To hide, add hidden string rule Class selectors rule book?
+} 
 
 function savePoster() { 
   var isDuplicate = false
   for (i=0; i < savedPosters.length; i++) {
-    if (savedPosters[i].isEqualNode(currentPoster)) { //going to every index in array, so if current poster is different then, it'll add that
+    if (savedPosters[i].isEqualNode(currentPoster)) { 
       isDuplicate = true; 
       break; 
     }
@@ -178,53 +178,40 @@ function savePoster() {
 
 function showSavedPoster() {
   posterGrid.innerHTML = ""
-  //example of creating new element - and append chidl
-  // const randomText = document.createElement('h2')
-  // randomText.innerText = "Hi Amy you are cute"
-  // posterGrid.appendChild(randomText)
   for (var i=0; i < savedPosters.length; i++) {
     var posterGridContainer = document.createElement('div');
     posterGridContainer.appendChild(savedPosters[i]);
     posterGrid.appendChild(savedPosters[i])
   }
   mainPoster.classList.add("hidden"); 
-  savedPosterTitle.classList.add("hidden");//add rule to hide poster
+  savedPosterTitle.classList.add("hidden");
   savedPostersButton.classList.remove("hidden")
   posterGrid.classList.remove("hidden")
   backToMainButton.classList.remove("hidden")
 } 
 
 
-// When a user clicks the “Nevermind, take me back!” or “Back to Main” buttons, we should only see the main poster section
 function backToMainPoster() {
-  // console.log('Taking me back to main poster')
   mainPoster.classList.remove("hidden");
-  nevermindTakeMeBackButton.classList.add("hidden"); //hide that button
-  createOwnPosterForm.classList.add("hidden"); //hide that createOwnPosterForm!
+  nevermindTakeMeBackButton.classList.add("hidden");
+  createOwnPosterForm.classList.add("hidden"); 
   posterGrid.classList.add("hidden");
   backToMainButton.classList.add("hidden")
   savedPostersButton.classList.add("hidden")
 }
 
 var inputForImageURL = document.querySelector('#poster-image-url')
-// var input = document.querySelector('input') //access 1st <input element>
-// var input1 = document.getElementById('poster-image-url') 
-// console.log(accessPosterImageURL,"accessPosterImageURL")
 var inputForTitle =  document.querySelector('#poster-title')
 var inputForQuote = document.querySelector('#poster-quote')
 
-function showUserInputPoster(event) { //prevent generateRandom from generating it
+function showUserInputPoster(event) { 
   event.preventDefault()
   var newImage = inputForImageURL.value
   var newTitle = inputForTitle.value
   var newQuote = inputForQuote.value
- //change mainPoster image to input values
-  var poster = createPoster(newImage,newTitle,newQuote) //returns object to property
+  var poster = createPoster(newImage,newTitle,newQuote) 
   renderPoster(poster);
-  backToMainPoster(); //when showuser button pressed, assign 
-  //Change back to the main poster view (hiding the form view again)
-  //inspect input area, to return what value.
-  // id.
+  backToMainPoster(); 
 }
 
 function renderPoster(poster) {
@@ -235,7 +222,6 @@ function renderPoster(poster) {
 }
 
 
-// Why is this function not removing the poster element when double clicking?
 function deletePoster() {
   for (i=0; i < savedPosters.length; i++) {
     if (savedPosters[i].isEqualNode(currentPoster)) {
@@ -245,17 +231,4 @@ function deletePoster() {
   }
 }
 
-//savedPosters.splice(i,1)
-//So, when you execute savedPosters.splice(i, 1), it
-// removes one element from the savedPosters array at the specified index i. 
-//After this operation, the array will be shorter by one element, and the removed
-// element will no longer be present in the array. This effectively deletes or removes 
-//the element from the array.
-
-//.style = inline CSS, go in CSS in HTML 
-//TIPS:
-//- Pay attention with SCOPE: has to do with scope!
-//- Math. = random decimal b/t 0-1   -> Math.floor - .floor brings it down to nearest whole number
-//-Best practice to hide first. To hide, add hidden string rule Class selectors rule book?
-//-Best practice not to querySelector in a function.
 
