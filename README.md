@@ -1,3 +1,5 @@
+*Poster Web Project*
+
 **Abstract:** This is a user-friendly app that allows users to create, save, and view motivational posters. With the click of a button, users can generate random posters for inspiration or design their own by inputting custom images, titles, and quotes. Adding to the interactivity, users can also save their favorite posters for future inspiration.
 
 **The features included are:**
@@ -12,7 +14,8 @@
 4. Have fun looking!
 
 **Preview of App:**
-![Hang In There Poster Project](https://amysiu1028.github.io/PosterWebProject/)
+![Hang In There Poster Project](https://amysiu1028.github.io/Poster-Web-Project/)
+
 <img width="745" alt="Screen Shot 2023-09-27 at 1 56 39 PM" src="https://user-images.githubusercontent.com/140124108/271075006-da2eb0b0-f09f-4127-90ce-2da313d2c91c.png">
 <img width="801" alt="Screen Shot 2023-09-27 at 1 57 16 PM" src="https://user-images.githubusercontent.com/140124108/271074715-eb91672a-428d-4574-8aa9-1d61d3f3f97a.png">
 <img width="818" alt="Screen Shot 2023-09-27 at 1 56 57 PM" src="https://user-images.githubusercontent.com/140124108/271074713-5f17d411-f1f0-488e-838d-f7051943eadb.png">
