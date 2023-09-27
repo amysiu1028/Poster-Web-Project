@@ -1,28 +1,20 @@
-//how to link Javascript file in HTML? 👇 //already done in HTML: script src="path-to-your-script.js"></script>
-
-// QUERY SELECTOR VARIABLES go here 👇
-//iteration 0:
-var accessImage = document.querySelector('.poster-img'); //accesses element src ="" where you put image URL
+// QUERY SELECTOR VARIABLES 
+var accessImage = document.querySelector('.poster-img'); 
 var accessTitle = document.querySelector('.poster-title');
-var accessQuote = document.querySelector('.poster-quote'); //gives us access to <h3>Quote</h3>
+var accessQuote = document.querySelector('.poster-quote'); 
 var ShowRandomPosterButton = document.querySelector('.show-random');
-
-//iteration 1:
 var makeOwnPosterButton = document.querySelector('.show-form');
 var showSavedPostersButton = document.querySelector('.show-saved'); 
 var saveAPosterButton = document.querySelector('.save-poster')
 var nevermindTakeMeBackButton = document.querySelector('.show-main'); 
 var backToMainButton = document.querySelector('.back-to-main');
-
 var mainPoster = document.querySelector('.main-poster'); 
 var createOwnPosterForm = document.querySelector('.poster-form');
-var savedPostersButton = document.querySelector('.saved-posters'); //hidden in string in index.html so to view it have to classList.remove("hidden")
-
-//iteration 2:
+var savedPostersButton = document.querySelector('.saved-posters'); 
 var showMyPoster = document.querySelector('.make-poster');
 var posterGrid = document.querySelector('.saved-posters-grid')
-
 var savedPosterTitle = document.querySelector('h2')
+
 // DATA PROVIDED 👇
 var images = [
   "./assets/bees.jpg",
@@ -122,8 +114,9 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
-var currentPoster = document.querySelector('.poster') // current poster on main page
-var newPoster = {} //container, can pass an object
+var currentPoster = document.querySelector('.poster') 
+var newPoster = {} 
+
 //EVENT LISTENERS HERE! 👇 TELLING COMPUTER TO LISTEN TO CLICK:
 window.addEventListener('load',randomPoster);
 ShowRandomPosterButton.addEventListener('click', randomPoster);
