@@ -13,7 +13,7 @@
 
 **Preview of App:**
 ![Hang In There Poster Project](https://amysiu1028.github.io/PosterWebProject/)
-<img width="745" alt="Screen Shot 2023-09-27 at 1 https://user-images.githubusercontent.com/140124108/271074703-40447e37-ee69-406a-a585-084f38332d0e.png">
+<img width="745" alt="Screen Shot 2023-09-27 at 1 56 39 PM" src="https://user-images.githubusercontent.com/140124108/271075006-da2eb0b0-f09f-4127-90ce-2da313d2c91c.png">
 <img width="801" alt="Screen Shot 2023-09-27 at 1 57 16 PM" src="https://user-images.githubusercontent.com/140124108/271074715-eb91672a-428d-4574-8aa9-1d61d3f3f97a.png">
 <img width="818" alt="Screen Shot 2023-09-27 at 1 56 57 PM" src="https://user-images.githubusercontent.com/140124108/271074713-5f17d411-f1f0-488e-838d-f7051943eadb.png">
 <img width="801" alt="Screen Shot 2023-09-27 at 1 57 22 PM" src="https://user-images.githubusercontent.com/140124108/271074720-8447288d-d9ad-4994-b11c-505b9295d92c.png">
