@@ -13,6 +13,9 @@
 3. Enter the command `open index.html` to open the app in your browser.
 4. Have fun looking!
 
+**Link:**
+[Live GitHub Link](https://amysiu1028.github.io/Poster-Web-Project/ )
+
 **Preview of App:**
 ![Hang In There Poster Project](https://amysiu1028.github.io/Poster-Web-Project/)
 
